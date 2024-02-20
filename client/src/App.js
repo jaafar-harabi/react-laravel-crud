@@ -1,4 +1,4 @@
-import {Nav} from './components'
+import {Nav,Foot} from './components'
 
 
 
@@ -7,6 +7,7 @@ function App() {
     <div>
 
       <Nav/>
+      <Foot/>
     
     </div>
   );
