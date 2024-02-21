@@ -4,25 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Data;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
+
 
 class DataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        return Data::select('id','name','email','phone');
-    }
-
-  
-    public function create()
-    {
-        //
-    }
-
+      $data = Data::all(); 
+          
+      return response()->json([
+           'results' => $data
+      ],200);    }
 
     public function store(Request $request)
     {
@@ -51,12 +44,10 @@ class DataController extends Controller
         'email'=>'required',
         'phone'=>'required'
       ]);
-      return response()->json([
-        'message'=>'item added successfully'
-      ]);
-
+      
       $data->fill($request->post())->update();
-      $data->save();
+
+  
       return response()->json([
         'message'=>'data updated'
       ]);
