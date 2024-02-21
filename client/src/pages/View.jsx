@@ -16,7 +16,7 @@ const View = () => {
   const [data,setData]=useState([]);
 
   const handlDelete = async(id)=>{
-      const res = await http.delete('/data/'+id)
+      const res = await http.delete('/'+id)
       if (res.data){
         console.log('success')
         fetchData()
@@ -27,15 +27,19 @@ const View = () => {
 
   const handlEdit = (id)=>{
 
-      navigate(`http://127.0.0.1:8000/api/data/${id}`)
+      navigate(`http://127.0.0.1:8000/api/${id}`)
 
 
   }
 
   const fetchData = async()=>{
     try {
-      const res = await http.get('/data')
-      if (res.data){
+      const res = await http.get('/')
+      console.log(res)
+      console.log(res.data)
+      console.log(res.data.results)
+      console.log(res.results)
+      if (res){
         setData(res.data.results)
         console.log(res.data.results)
 
@@ -53,6 +57,8 @@ const View = () => {
 
 
   },[])
+
+
   return (
     <Card className="h-full w-1/2 overflow-scroll mx-auto mt-36">
       <table className="w-full min-w-max table-auto text-left">

@@ -27,7 +27,7 @@ const Add = () => {
 
     try {
     
-      const res = await http.post('/data/',formdata)
+      const res = await http.post('/post/',formdata)
       if (res.data){
         console.log('success')
         console.log(res.data)
