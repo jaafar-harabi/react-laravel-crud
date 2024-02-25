@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Data;
 use Illuminate\Http\Request;
 
-
 class DataController extends Controller
 {
     
@@ -24,20 +23,24 @@ class DataController extends Controller
           'email'=>'required',
           'phone'=>'required'
         ]);
+
+        Data::create($request->all());
         return response()->json([
           'message'=>'item added successfully'
         ]);
     }
 
 
-    public function show(Data $data)
+    public function show($id)
     {
+
+      $data=Data::find($id);
         return response()->json([
-            'data'=>$data
+            'item'=>$data
         ]);
     }
 
-    public function update(Request $request, Data $data)
+    public function update(Request $request, $id)
     {
       $request->validate([
         'name'=>'required',
@@ -45,7 +48,8 @@ class DataController extends Controller
         'phone'=>'required'
       ]);
       
-      $data->fill($request->post())->update();
+      $data=Data::find($id);
+      $data->update($request->all());
 
   
       return response()->json([
@@ -53,8 +57,9 @@ class DataController extends Controller
       ]);
     }
 
-    public function destroy(Data $data)
+    public function destroy($id)
     {
+        $data=Data::find($id);
         $data->delete();
         return response()->json([
           'message'=>"item deleted successfully"
