@@ -6,14 +6,14 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Api from '../api/Api';
-import {useparams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 
 
 
 const Edit = () => {
 
   const http =Api();
-  const {id} = useparams()
+  const {id} = useParams()
 
   const [name,setName]=useState('')
   const [email,setEmail]=useState('')
@@ -23,14 +23,9 @@ const Edit = () => {
 
     e.preventDefault()
 
-    const formdata = new FormData()
-    formdata.append('name',name)
-    formdata.append('email',email)
-    formdata.append('phone',phone)
-
     try {
     
-      const res = await http.put(`/data/${id}`,formdata)
+      const res = await http.put(`/data/${id}`,{name,email,phone})
       if (res.data){
         console.log('success')
         console.log(res.data)
@@ -43,7 +38,23 @@ const Edit = () => {
     }
   }
 
+  
+
   useEffect(()=>{
+
+    const fetchDataById = async()=>{
+      const res = await http.get(`/data/${id}`)
+        if (res.data){
+          setName(res.data.item.name)
+          setEmail(res.data.item.email)
+          setPhone(res.data.item.phone)
+        }
+      
+    }
+
+    fetchDataById(id)
+
+    
 
   },[])
   return (
@@ -101,7 +112,7 @@ const Edit = () => {
       </div>
   
       <Button className="mt-6 mb-5" fullWidth  type='submit' >
-          Add
+          Update
       </Button>
     
     </form>

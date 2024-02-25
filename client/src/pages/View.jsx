@@ -6,7 +6,6 @@ import {useNavigate} from 'react-router-dom'
 import Api from '../api/Api'
 
 
-
 const View = () => {
 
   const http =Api();
@@ -36,14 +35,8 @@ const View = () => {
   const fetchData = async()=>{
     try {
       const res = await http.get('/data')
-      console.log(res)
-      console.log(res.data)
-      console.log(res.data.results)
-      console.log(res.results)
       if (res){
         setData(res.data.results)
-        console.log(res.data.results)
-
       }
     } catch (error) {
       console.log(error)
@@ -51,12 +44,7 @@ const View = () => {
   }
 
   useEffect(()=>{
-
-      
-
       fetchData()
-
-
   },[])
 
 
