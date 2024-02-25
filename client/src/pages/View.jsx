@@ -16,8 +16,9 @@ const View = () => {
   const [data,setData]=useState([]);
 
   const handlDelete = async(id)=>{
-      const res = await http.delete('/'+id)
-      if (res.data){
+      const res = await http.delete(`/delete/${id}`)
+      console.log(res)
+      if (res){
         console.log('success')
         fetchData()
 
@@ -27,14 +28,14 @@ const View = () => {
 
   const handlEdit = (id)=>{
 
-      navigate(`http://127.0.0.1:8000/api/${id}`)
+      navigate(`/${id}`)
 
 
   }
 
   const fetchData = async()=>{
     try {
-      const res = await http.get('/')
+      const res = await http.get('/data')
       console.log(res)
       console.log(res.data)
       console.log(res.data.results)

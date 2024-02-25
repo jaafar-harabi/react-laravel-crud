@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Card,
   Input,
@@ -20,14 +20,9 @@ const Add = () => {
 
     e.preventDefault()
 
-    const formdata = new FormData()
-    formdata.append('name',name)
-    formdata.append('email',email)
-    formdata.append('phone',phone)
-
     try {
     
-      const res = await http.post('/post/',formdata)
+      const res = await http.post('/data',{name,email,phone})
       if (res.data){
         console.log('success')
         console.log(res.data)
@@ -39,7 +34,10 @@ const Add = () => {
       
     }
 
+    
   }
+
+  
   return (
     <Card color="transparent" shadow={false} className='border-2 border-black mx-auto w-1/2 mt-20'>
       

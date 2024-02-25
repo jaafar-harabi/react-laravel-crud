@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default function Api(){
   const http = axios.create({
-    baseURL : 'http://127.0.0.1:8000/api',
+    baseURL : `${process.env.REACT_APP_API}`,
     headers : {
       'Content-Type' : 'application/json'
     }
